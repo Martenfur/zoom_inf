@@ -8,6 +8,18 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\screenToField_xy.gml</script>
+    <script>scripts\angleBound.gml</script>
+    <script>scripts\fieldToScreen_xy.gml</script>
+  </scripts>
+  <objects name="objects">
+    <object>objects\cntrl</object>
+    <object>objects\field</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\room0</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
