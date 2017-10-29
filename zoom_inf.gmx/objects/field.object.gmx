@@ -29,7 +29,7 @@
 radius=256
 scale=   1
 
-polygonCount=5
+polygonCount=6
 polygonAngle=360/polygonCount
 
 polygonFaceLength=point_distance(0,
@@ -38,9 +38,17 @@ polygonFaceLength=point_distance(0,
                                  lengthdir_y(radius,polygonAngle))
 
 field_w=1024
-field_h=256
-                                 
+field_h= 256
 
+
+
+//middleVectorL=radius
+
+for(var i=0; i&lt;polygonCount i+=1)
+{
+  middleVector[i,0]=lengthdir_x(1,polygonAngle*(i+0.5))
+  middleVector[i,1]=lengthdir_y(1,polygonAngle*(i+0.5))
+}
 </string>
           </argument>
         </arguments>
@@ -75,23 +83,31 @@ for(var i=0; i&lt;polygonCount i+=1)
 
 draw_primitive_end()
 
-screenToField_xy(id,mouse_x,mouse_y)
 
-draw_text(32,32,string(__f_x)+" "+string(__f_y))
+var _rr=point_distance(x,y,mouse_x,mouse_y),
+    _aa=point_direction(x,y,mouse_x,mouse_y);
+  
+arr1=polarToField_xy(id,_rr,_aa)
 
-rr=__f_y/field_h*radius*scale
-aa=__f_x/field_w*360
+draw_text(32,32,string(arr1[0])+" "+string(arr1[1]))
 
-xx=x+lengthdir_x(rr,aa+rotation)
-yy=y+lengthdir_y(rr,aa+rotation)
+arr2=fieldToPolar_xy(id,arr1[0],arr1[1])
+
+aa=arr2[0]
+rr=arr2[1]
+
+xx=x+lengthdir_x(rr,aa)
+yy=y+lengthdir_y(rr,aa)
 
 draw_set_color(c_green)
 draw_circle(xx,yy,4,0)
+draw_line(xx,yy,x,y)
 
 
 scale=1+lengthdir_y(0.25,current_time/40)
 rotation+=1
 rotation=angleBound(rotation)
+
 
 
 </string>
