@@ -5,7 +5,7 @@ with(argument0)
 {
   var _coordinates;
   
-  var _a=angleBound(argument2-rotation);
+  var _a=valueBound(argument2-rotation,360);
   
   var _sectorId=_a div polygonAngle; 
   
@@ -16,7 +16,7 @@ with(argument0)
   _x=lengthdir_x(argument1/scale,_a)
   _y=lengthdir_y(argument1/scale,_a)
   
-  _coordinates[1]=proj(_x,_y,middleVector[_sectorId,0],middleVector[_sectorId,1])
+  _coordinates[1]=proj(_x,_y,middleVector[_sectorId,0]*middleVectorL,middleVector[_sectorId,1]*middleVectorL)/middleVectorL*field_h
   
   return _coordinates
 }

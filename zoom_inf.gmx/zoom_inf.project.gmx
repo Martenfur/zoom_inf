@@ -9,18 +9,33 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\angleBound.gml</script>
+    <script>scripts\valueBound.gml</script>
     <script>scripts\proj.gml</script>
     <script>scripts\polarToField_xy.gml</script>
     <script>scripts\fieldToPolar_xy.gml</script>
+    <scripts name="ring">
+      <script>scripts\ringMaskAdd.gml</script>
+      <script>scripts\ringMaskGet_x.gml</script>
+      <script>scripts\ringMaskGet_w.gml</script>
+      <script>scripts\ringMaskSetState.gml</script>
+      <script>scripts\ringMaskGetState.gml</script>
+    </scripts>
+    <script>scripts\ringMaskDraw.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\cntrl</object>
     <object>objects\field</object>
+    <object>objects\ring</object>
+    <object>objects\ring_rotatable</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
+  <constants number="3">
+    <constant name="FIELD_INTERNAL_W">1024</constant>
+    <constant name="FIELD_INTERNAL_H">256</constant>
+    <constant name="_RING_MASK_STRUCT_SIZE">3</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

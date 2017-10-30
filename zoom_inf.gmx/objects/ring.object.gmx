@@ -25,38 +25,21 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>rotation=0
-radius=FIELD_INTERNAL_H
-scale=   1
+            <string>parentField=noone
 
-polygonCount=8
-polygonAngle=360/polygonCount
+masks=ds_list_create()
 
-polygonFaceLength=point_distance(radius,
-                                 0,
-                                 lengthdir_x(radius,polygonAngle),
-                                 lengthdir_y(radius,polygonAngle))
+h=FIELD_INTERNAL_H/4
 
-field_w=FIELD_INTERNAL_W
-field_h=FIELD_INTERNAL_H
+yscale=1
 
-middleVectorL=sqrt(sqr(radius)-sqr(polygonFaceLength/2))
-
-for(var i=0; i&lt;polygonCount i+=1)
-{
-  middleVector[i,0]=lengthdir_x(1,polygonAngle*(i+0.5))
-  middleVector[i,1]=lengthdir_y(1,polygonAngle*(i+0.5))
-}
-
-
-newring=instance_create(0,FIELD_INTERNAL_H,ring_rotatable)
 
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="1" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -73,50 +56,7 @@ newring=instance_create(0,FIELD_INTERNAL_H,ring_rotatable)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_color(c_black)
-
-draw_primitive_begin(pr_trianglefan)
-
-for(var i=0; i&lt;polygonCount i+=1)
-{
-  draw_vertex(x+lengthdir_x(radius*scale,rotation+polygonAngle*i),
-              y+lengthdir_y(radius*scale,rotation+polygonAngle*i))
-}
-
-draw_primitive_end()
-
-
-var _rr=point_distance(x,y,mouse_x,mouse_y),
-    _aa=point_direction(x,y,mouse_x,mouse_y);
-  
-arr1=polarToField_xy(id,_rr,_aa)
-
-draw_text(32,32,string(arr1[0])+" "+string(arr1[1]))
-arr2=fieldToPolar_xy(id,arr1[0],arr1[1])
-/*
-for(i=0 i&lt;360 i+=1)
-{
-//arr1=polarToField_xy(id,128,i)
-arr2=fieldToPolar_xy(id,i*4,128)
-
-aa=arr2[0]
-rr=arr2[1]
-
-xx=x+lengthdir_x(rr,aa)
-yy=y+lengthdir_y(rr,aa)
-
-draw_set_color(c_white)
-draw_circle(xx,yy,1,0)
-}
-*/
-//draw_line(xx,yy,x,y)
-
-ringMaskDraw(id,newring,0)
-
-//scale=0.5+lengthdir_y(0.25,current_time/40)
-//rotation-=1
-//rotation=valueBound(rotation,360)
-
+            <string>ds_list_destroy(masks)
 
 </string>
           </argument>
