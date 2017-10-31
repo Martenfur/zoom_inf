@@ -28,6 +28,7 @@ draw_vertex(_field.x+lengthdir_x(_polar2[1],_polar2[0]),
 
 for(var i=1+_sector1Id; i<=_sector2Id i+=1)
 {
+/*
   _polar1=fieldToPolar_xy(_field,i*_field.field_w/_field.polygonCount,_ring.y);
   _polar2=fieldToPolar_xy(_field,i*_field.field_w/_field.polygonCount,_ring.y+_ring.h);
 
@@ -35,7 +36,10 @@ for(var i=1+_sector1Id; i<=_sector2Id i+=1)
              _field.y+lengthdir_y(_polar1[1],_polar1[0]))
   draw_vertex(_field.x+lengthdir_x(_polar2[1],_polar2[0]),
              _field.y+lengthdir_y(_polar2[1],_polar2[0]))
-            
+*/    
+  draw_vertex(x+lengthdir_x(radius*scale,rotation+polygonAngle*i),
+              y+lengthdir_y(radius*scale,rotation+polygonAngle*i))
+        
 }
 
 

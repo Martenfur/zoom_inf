@@ -88,7 +88,7 @@ draw_primitive_end()
 
 var _rr=point_distance(x,y,mouse_x,mouse_y),
     _aa=point_direction(x,y,mouse_x,mouse_y);
-  
+
 arr1=polarToField_xy(id,_rr,_aa)
 
 draw_text(32,32,string(arr1[0])+" "+string(arr1[1]))

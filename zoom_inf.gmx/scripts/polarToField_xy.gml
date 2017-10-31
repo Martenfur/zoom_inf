@@ -1,5 +1,8 @@
 ///polarToField_xy(field,r,a)
 
+/*
+Converts polar screen coordinates to field (x;y).
+*/
 
 with(argument0)
 {
@@ -9,14 +12,22 @@ with(argument0)
   
   var _sectorId=_a div polygonAngle; 
   
+  //x
   _coordinates[0]=((_a-polygonAngle*_sectorId)/polygonAngle+_sectorId)*field_w/polygonCount
+  //x
   
   /////////////////////////////////////////////////////////
-  var _x,_y;
-  _x=lengthdir_x(argument1/scale,_a)
-  _y=lengthdir_y(argument1/scale,_a)
   
-  _coordinates[1]=proj(_x,_y,middleVector[_sectorId,0]*middleVectorL,middleVector[_sectorId,1]*middleVectorL)/middleVectorL*field_h
+  //y
+  var _x=lengthdir_x(argument1/scale,_a),
+      _y=lengthdir_y(argument1/scale,_a);
+  
+  _coordinates[1]=proj(_x,
+                       _y,
+                       middleVector[_sectorId,0]*middleVectorL,
+                       middleVector[_sectorId,1]*middleVectorL)
+                  /middleVectorL*field_h
+  //y
   
   return _coordinates
 }
