@@ -52,10 +52,10 @@ ringMaskAdd(300,128)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>masks[|0]+=2//1024*point_direction(field.x,field.y,mouse_x,mouse_y)/360
+            <string>masks[|0]-=2//1024*point_direction(field.x,field.y,mouse_x,mouse_y)/360
 
-y=128+lengthdir_y(64,current_time/30)//point_distance(field.x,field.y,mouse_x,mouse_y)
-field.scale=0.5
+y=128//128+lengthdir_y(128,current_time/30)//point_distance(field.x,field.y,mouse_x,mouse_y)
+//field.scale=0.5
 </string>
           </argument>
         </arguments>

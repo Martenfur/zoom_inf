@@ -89,33 +89,25 @@ draw_primitive_end()
 var _rr=point_distance(x,y,mouse_x,mouse_y),
     _aa=point_direction(x,y,mouse_x,mouse_y);
 
-arr1=polarToField_xy(id,_rr,_aa)
+var arr=polarToField_xy(id,_rr,_aa);
 
-draw_text(32,32,string(arr1[0])+" "+string(arr1[1]))
-arr2=fieldToPolar_xy(id,arr1[0],arr1[1])
-/*
-for(i=0 i&lt;360 i+=1)
-{
-//arr1=polarToField_xy(id,128,i)
-arr2=fieldToPolar_xy(id,i*4,128)
 
-aa=arr2[0]
-rr=arr2[1]
+with(newring)
+if ringMaskCheckPoint(arr[0],arr[1],0)
+{draw_set_color(c_red)}
+else
+{draw_set_color(c_blue)}
 
-xx=x+lengthdir_x(rr,aa)
-yy=y+lengthdir_y(rr,aa)
+with(newring)
+{ringMaskDraw(other,0)}
 
-draw_set_color(c_white)
-draw_circle(xx,yy,1,0)
-}
-*/
-//draw_line(xx,yy,x,y)
+scale=0.5+lengthdir_y(0.25,current_time/40)
+rotation-=1
+rotation=valueBound(rotation,360)
 
-ringMaskDraw(id,newring,0)
+draw_set_color(c_red)
+draw_circle(mouse_x,mouse_y,3,0)
 
-//scale=0.5+lengthdir_y(0.25,current_time/40)
-//rotation-=1
-//rotation=valueBound(rotation,360)
 
 
 </string>

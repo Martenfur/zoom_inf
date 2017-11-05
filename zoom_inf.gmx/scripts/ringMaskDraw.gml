@@ -1,50 +1,43 @@
-///ringMaskDraw(field,ring,mask_id)
+///ringMaskDraw(field,mask_id)
 
 var _field=argument0,
-    _ring=argument1,
-    _maskId=argument2;
+    _maskId=argument1;
+
 
 draw_primitive_begin(pr_trianglestrip)
 
 var _mx,_mw;
-with(_ring)
-{
-  _mx=ringMaskGet_x(_maskId)
-  _mw=ringMaskGet_w(_maskId)
-}
+_mx=ringMaskGet_x(_maskId)
+_mw=ringMaskGet_w(_maskId)
+
+while(_mx<0)
+{_mx+=FIELD_INTERNAL_W}
 
 var _sector1Id=_mx div (_field.field_w/_field.polygonCount),
     _sector2Id=(_mx+_mw) div (_field.field_w/_field.polygonCount);
 
 
-var _polar1=fieldToPolar_xy(_field,_mx,_ring.y);
-var _polar2=fieldToPolar_xy(_field,_mx,_ring.y+_ring.h);
-show_debug_message(_polar1[1])
+var _polar1=fieldToPolar_xy(_field,_mx,y);
+var _polar2=fieldToPolar_xy(_field,_mx,y+h);
 
 draw_vertex(_field.x+lengthdir_x(_polar1[1],_polar1[0]),
             _field.y+lengthdir_y(_polar1[1],_polar1[0]))
 draw_vertex(_field.x+lengthdir_x(_polar2[1],_polar2[0]),
             _field.y+lengthdir_y(_polar2[1],_polar2[0]))
 
+var _lx,_ly;
+
 for(var i=1+_sector1Id; i<=_sector2Id i+=1)
 {
-/*
-  _polar1=fieldToPolar_xy(_field,i*_field.field_w/_field.polygonCount,_ring.y);
-  _polar2=fieldToPolar_xy(_field,i*_field.field_w/_field.polygonCount,_ring.y+_ring.h);
-
-  draw_vertex(_field.x+lengthdir_x(_polar1[1],_polar1[0]),
-             _field.y+lengthdir_y(_polar1[1],_polar1[0]))
-  draw_vertex(_field.x+lengthdir_x(_polar2[1],_polar2[0]),
-             _field.y+lengthdir_y(_polar2[1],_polar2[0]))
-*/    
-  draw_vertex(x+lengthdir_x(radius*scale,rotation+polygonAngle*i),
-              y+lengthdir_y(radius*scale,rotation+polygonAngle*i))
-        
+  _lx=lengthdir_x(_field.radius*_field.scale/_field.field_h,_field.rotation+_field.polygonAngle*i)
+  _ly=lengthdir_y(_field.radius*_field.scale/_field.field_h,_field.rotation+_field.polygonAngle*i)
+              
+  draw_vertex(_field.x+_lx*y,_field.y+_ly*y)
+  draw_vertex(_field.x+_lx*(y+h),_field.y+_ly*(y+h))
 }
 
-
-_polar1=fieldToPolar_xy(_field,_mx+_mw,_ring.y)
-_polar2=fieldToPolar_xy(_field,_mx+_mw,_ring.y+_ring.h)
+_polar1=fieldToPolar_xy(_field,_mx+_mw,y)
+_polar2=fieldToPolar_xy(_field,_mx+_mw,y+h)
 
 draw_vertex(_field.x+lengthdir_x(_polar1[1],_polar1[0]),
             _field.y+lengthdir_y(_polar1[1],_polar1[0]))

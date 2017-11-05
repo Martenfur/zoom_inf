@@ -19,8 +19,11 @@
       <script>scripts\ringMaskGet_w.gml</script>
       <script>scripts\ringMaskSetState.gml</script>
       <script>scripts\ringMaskGetState.gml</script>
+      <script>scripts\ringMaskCount.gml</script>
     </scripts>
     <script>scripts\ringMaskDraw.gml</script>
+    <script>scripts\ringDraw.gml</script>
+    <script>scripts\ringMaskCheckPoint.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\cntrl</object>

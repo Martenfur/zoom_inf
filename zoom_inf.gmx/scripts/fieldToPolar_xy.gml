@@ -18,16 +18,7 @@ with(argument0)
       _v2x=-middleVector[_sectorId,1],
       _v2y=middleVector[_sectorId,0];
       
-  draw_set_color(c_yellow)
-  draw_line(x,y,x+_x0,y+_y0)
-  draw_line(x+_x0,y+_y0,x+_x0+_v2x*8,y+_y0+_v2y*8)
-  
-  draw_set_color(c_green)
-  draw_line(x,y,x+_v1x*64,y+_v1y*64)
-  
-  draw_set_color(c_white)
-      
-  _coordinates[1]=(((_y0*_v2x)-(_x0*_v2y))/((_v2x*_v1y)-(_v2y*_v1x)))*scale/field_h*middleVectorL
+  _coordinates[1]=(((_y0*_v2x)-(_x0*_v2y))/((_v2x*_v1y)-(_v2y*_v1x)))*scale/field_h*radius
   
   return _coordinates
 }
