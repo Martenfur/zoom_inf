@@ -11,6 +11,8 @@ with(argument0)
   var _a=valueBound(argument2-rotation,360);
   
   var _sectorId=_a div polygonAngle; 
+  if _sectorId>=polygonCount
+  {_sectorId-=polygonCount}
   
   //x
   _coordinates[0]=((_a-polygonAngle*_sectorId)/polygonAngle+_sectorId)*field_w/polygonCount

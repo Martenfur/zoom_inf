@@ -11,8 +11,10 @@
   <scripts name="scripts">
     <script>scripts\valueBound.gml</script>
     <script>scripts\proj.gml</script>
+    <script>scripts\chooseSign.gml</script>
     <script>scripts\polarToField_xy.gml</script>
     <script>scripts\fieldToPolar_xy.gml</script>
+    <script>scripts\fieldRingsMove.gml</script>
     <scripts name="ring">
       <script>scripts\ringMaskAdd.gml</script>
       <script>scripts\ringMaskGet_x.gml</script>
@@ -20,13 +22,19 @@
       <script>scripts\ringMaskSetState.gml</script>
       <script>scripts\ringMaskGetState.gml</script>
       <script>scripts\ringMaskCount.gml</script>
+      <script>scripts\ringMaskDraw.gml</script>
+      <script>scripts\ringDraw.gml</script>
+      <script>scripts\ringMaskCheckPoint.gml</script>
     </scripts>
-    <script>scripts\ringMaskDraw.gml</script>
-    <script>scripts\ringDraw.gml</script>
-    <script>scripts\ringMaskCheckPoint.gml</script>
+    <script>scripts\fieldRingsSpawn.gml</script>
+    <script>scripts\fieldScaleChange.gml</script>
+    <script>scripts\fieldDraw.gml</script>
+    <script>scripts\ringControllable.gml</script>
+    <script>scripts\getCurrentFIeld.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\cntrl</object>
+    <object>objects\game_cntrl</object>
     <object>objects\field</object>
     <object>objects\ring</object>
     <object>objects\ring_rotatable</object>
@@ -34,10 +42,12 @@
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="3">
+  <constants number="5">
     <constant name="FIELD_INTERNAL_W">1024</constant>
     <constant name="FIELD_INTERNAL_H">256</constant>
     <constant name="_RING_MASK_STRUCT_SIZE">3</constant>
+    <constant name="RING_H">FIELD_INTERNAL_H/4</constant>
+    <constant name="RING_SEP">FIELD_INTERNAL_H/8</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

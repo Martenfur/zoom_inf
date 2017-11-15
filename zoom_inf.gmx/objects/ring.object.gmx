@@ -29,9 +29,12 @@
 
 masks=ds_list_create()
 
-h=FIELD_INTERNAL_H/4
+h=RING_H
 
 yscale=1
+
+distortion=1 //Level of distorion.
+distortion_h=1
 
 
 </string>
@@ -57,6 +60,34 @@ yscale=1
           <argument>
             <kind>1</kind>
             <string>ds_list_destroy(masks)
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if y&gt;FIELD_INTERNAL_H
+{distortion=sqrt(y/FIELD_INTERNAL_H)}
+
+if y+h&gt;FIELD_INTERNAL_H
+{distortion_h=sqrt((y+h)/FIELD_INTERNAL_H)}  
 
 </string>
           </argument>

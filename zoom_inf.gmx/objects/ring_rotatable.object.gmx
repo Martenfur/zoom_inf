@@ -27,9 +27,39 @@
             <kind>1</kind>
             <string>event_inherited()
 
-ringMaskAdd(32,350)
-ringMaskAdd(300,128)
+ringMaskAdd(0,FIELD_INTERNAL_W-irandom_range(FIELD_INTERNAL_W/4,FIELD_INTERNAL_W/6))
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if ringControllable()
+{
+  if mouse_check_button(mb_left)
+  {
+    var fieldCur=getCurrentFIeld();
+    var _dir=point_direction(fieldCur.x,fieldCur.y,mouse_x,mouse_y);
+    masks[|0]=_dir/360*FIELD_INTERNAL_W
+  }
+}
 </string>
           </argument>
         </arguments>
@@ -52,10 +82,13 @@ ringMaskAdd(300,128)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>masks[|0]-=2//1024*point_direction(field.x,field.y,mouse_x,mouse_y)/360
+            <string>//masks[|0]-=2//1024*point_direction(field.x,field.y,mouse_x,mouse_y)/360
 
-y=128//128+lengthdir_y(128,current_time/30)//point_distance(field.x,field.y,mouse_x,mouse_y)
+//y=128+lengthdir_y(128,current_time/30)//point_distance(field.x,field.y,mouse_x,mouse_y)
 //field.scale=0.5
+
+
+
 </string>
           </argument>
         </arguments>

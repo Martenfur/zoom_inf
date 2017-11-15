@@ -9,6 +9,8 @@ with(argument0)
   _coordinates[0]=valueBound(_a+rotation,360)
   
   var _sectorId=_a div polygonAngle; 
+  if _sectorId>=polygonCount
+  {_sectorId-=polygonCount}
   
   var _x0=middleVector[_sectorId,0]/field_h*middleVectorL*argument2,
       _y0=middleVector[_sectorId,1]/field_h*middleVectorL*argument2;
@@ -19,6 +21,9 @@ with(argument0)
       _v2y=middleVector[_sectorId,0];
       
   _coordinates[1]=(((_y0*_v2x)-(_x0*_v2y))/((_v2x*_v1y)-(_v2y*_v1x)))*scale/field_h*radius
+  
+  if _coordinates[1]<0
+  {_coordinates[1]=0}
   
   return _coordinates
 }
