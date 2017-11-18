@@ -27,7 +27,16 @@
             <kind>1</kind>
             <string>event_inherited()
 
-ringMaskAdd(0,FIELD_INTERNAL_W-irandom_range(FIELD_INTERNAL_W/4,FIELD_INTERNAL_W/6))
+drawEvent=ringRotatableDraw
+
+var gapSize=irandom_range(FIELD_INTERNAL_W/4,FIELD_INTERNAL_W/6);
+
+ringMaskAdd(player.x+irandom(gapSize)+FIELD_INTERNAL_W/2,FIELD_INTERNAL_W-gapSize)
+
+angStart=0
+for(var i=0; i&lt;ringMaskCount() i+=1)
+{mask_xstart[i]=0}
+rotated=0
 
 </string>
           </argument>
@@ -53,42 +62,26 @@ ringMaskAdd(0,FIELD_INTERNAL_W-irandom_range(FIELD_INTERNAL_W/4,FIELD_INTERNAL_W
             <kind>1</kind>
             <string>if ringControllable()
 {
-  if mouse_check_button(mb_left)
+  var fieldCur=getCurrentField();
+  var dir=valueBound(point_direction(fieldCur.x,fieldCur.y,mouse_x,mouse_y)-fieldCur.rotation,360);
+   
+  if mouse_check_button_pressed(mb_left)
   {
-    var fieldCur=getCurrentFIeld();
-    var _dir=point_direction(fieldCur.x,fieldCur.y,mouse_x,mouse_y);
-    masks[|0]=_dir/360*FIELD_INTERNAL_W
+    rotated=1
+    for(var i=0; i&lt;ringMaskCount() i+=1)
+    {mask_xstart[i]=ringMaskGet_x(i)}
+    angStart=dir
   }
+  if mouse_check_button(mb_left) &amp;&amp; rotated
+  {
+    var diff=angle_difference(dir,angStart)/360*FIELD_INTERNAL_W
+     
+    for(var i=0; i&lt;ringMaskCount() i+=1)
+    {ringMaskSet_x(i,mask_xstart[i]+diff)} 
+  }
+  else
+  {rotated=0}
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//masks[|0]-=2//1024*point_direction(field.x,field.y,mouse_x,mouse_y)/360
-
-//y=128+lengthdir_y(128,current_time/30)//point_distance(field.x,field.y,mouse_x,mouse_y)
-//field.scale=0.5
-
-
-
 </string>
           </argument>
         </arguments>

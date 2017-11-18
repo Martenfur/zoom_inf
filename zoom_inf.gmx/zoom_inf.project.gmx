@@ -9,28 +9,43 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\valueBound.gml</script>
-    <script>scripts\proj.gml</script>
-    <script>scripts\chooseSign.gml</script>
+    <scripts name="misc">
+      <script>scripts\valueBound.gml</script>
+      <script>scripts\proj.gml</script>
+      <script>scripts\chooseSign.gml</script>
+    </scripts>
     <script>scripts\polarToField_xy.gml</script>
     <script>scripts\fieldToPolar_xy.gml</script>
-    <script>scripts\fieldRingsMove.gml</script>
-    <scripts name="ring">
-      <script>scripts\ringMaskAdd.gml</script>
-      <script>scripts\ringMaskGet_x.gml</script>
-      <script>scripts\ringMaskGet_w.gml</script>
-      <script>scripts\ringMaskSetState.gml</script>
-      <script>scripts\ringMaskGetState.gml</script>
-      <script>scripts\ringMaskCount.gml</script>
-      <script>scripts\ringMaskDraw.gml</script>
-      <script>scripts\ringDraw.gml</script>
-      <script>scripts\ringMaskCheckPoint.gml</script>
+    <scripts name="field">
+      <script>scripts\fieldRingsMove.gml</script>
+      <script>scripts\fieldRingsSpawn.gml</script>
+      <script>scripts\fieldScaleChange.gml</script>
+      <script>scripts\fieldIncrementState.gml</script>
+      <script>scripts\fieldDraw.gml</script>
+      <script>scripts\fieldRingsAdvance.gml</script>
     </scripts>
-    <script>scripts\fieldRingsSpawn.gml</script>
-    <script>scripts\fieldScaleChange.gml</script>
-    <script>scripts\fieldDraw.gml</script>
-    <script>scripts\ringControllable.gml</script>
-    <script>scripts\getCurrentFIeld.gml</script>
+    <scripts name="ring">
+      <scripts name="masks">
+        <script>scripts\ringMaskAdd.gml</script>
+        <script>scripts\ringMaskGet_x.gml</script>
+        <script>scripts\ringMaskSet_x.gml</script>
+        <script>scripts\ringMaskGet_w.gml</script>
+        <script>scripts\ringMaskSetState.gml</script>
+        <script>scripts\ringMaskGetState.gml</script>
+        <script>scripts\ringMaskCount.gml</script>
+        <script>scripts\ringMaskDraw.gml</script>
+        <script>scripts\ringMaskCheckPoint.gml</script>
+        <script>scripts\ringCheckPoint.gml</script>
+      </scripts>
+      <scripts name="draw events">
+        <script>scripts\ringDraw.gml</script>
+        <script>scripts\ringPressableDraw.gml</script>
+        <script>scripts\ringRotatableDraw.gml</script>
+      </scripts>
+      <script>scripts\ringControllable.gml</script>
+    </scripts>
+    <script>scripts\getCurrentField.gml</script>
+    <script>scripts\drawPlayer.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\cntrl</object>
@@ -38,6 +53,8 @@
     <object>objects\field</object>
     <object>objects\ring</object>
     <object>objects\ring_rotatable</object>
+    <object>objects\ring_pressable</object>
+    <object>objects\player</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

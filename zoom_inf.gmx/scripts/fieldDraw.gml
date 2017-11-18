@@ -16,14 +16,12 @@ var _rr=point_distance(x,y,mouse_x,mouse_y),
 
 var arr=polarToField_xy(id,_rr,_aa);
 
-if active
+if state
 {
-  draw_set_color(ringColor)
-
   for(var i=0; i<ringsAm i+=1)
   {
     with(rings[i])
-    {ringDraw(other)}
+    {script_execute(drawEvent,other)}
   }
 }
 

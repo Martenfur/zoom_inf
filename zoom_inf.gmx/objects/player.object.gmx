@@ -25,41 +25,33 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>parentField=noone
+            <string>var fieldCur=getCurrentField();
 
-masks=ds_list_create()
 
-h=RING_H
+base_y=fieldCur.ringBase_y+RING_H+RING_SEP
 
-yscale=1
+y=base_y
 
-distortion=1 //Level of distorion.
-distortion_h=1
+goTime=5
+goVal=0
 
-drawEvent=ringDraw
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>ds_list_destroy(masks)
+returnTime=10
+returnVal=0
+
+
+//spd=15
+
+
+/*
+0 - still
+1 - bashing
+2 - returning
+*/
+state=0
+
+size=16
+
+
 
 </string>
           </argument>
@@ -83,12 +75,54 @@ drawEvent=ringDraw
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if y&gt;FIELD_INTERNAL_H
-{distortion=sqrt(y/FIELD_INTERNAL_H)}
+            <string>if state=1
+{
+  //y-=spd
+  
+  goVal+=1
+  y=lerp(base_y,0,goVal/goTime)
+  
+  var _collision=noone;
+  
+  var f=getCurrentField();
+  
+  with(f)
+  {
+    for(var i=0; i&lt;ringsAm i+=1)
+    {
+      with(rings[i])
+      {_collision=ringCheckPoint(player.x,player.y)} 
+      if _collision!=noone
+      {
+        if _collision!=rings[ringCurrent]
+        {fieldRingsAdvance()}
+        other.y=_collision.y+RING_H
+        other.state=2
+        break
+      }
+    }
+  }
+  
+  if y&lt;=0
+  {
+    with(f)
+    {fieldIncrementState()}
+    state=2
+  }
+}
 
-if y+h&gt;FIELD_INTERNAL_H
-{distortion_h=sqrt((y+h)/FIELD_INTERNAL_H)}  
+if state=2
+{
+  goVal=0
 
+  y+=max(1,(base_y-y)/3)
+  
+  if y&gt;=base_y
+  {
+    state=0
+    y=base_y
+  }
+}
 </string>
           </argument>
         </arguments>

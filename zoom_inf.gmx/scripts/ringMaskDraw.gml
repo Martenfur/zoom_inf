@@ -3,7 +3,9 @@
 var _field=argument0,
     _maskId=argument1;
 
-
+if keyboard_check(ord('S'))
+draw_primitive_begin(pr_linestrip)
+else
 draw_primitive_begin(pr_trianglestrip)
 
 var _mx,_mw;

@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>mainField=instance_create(room_width/2,room_height/2,field)
-
+instance_create(0,0,player)
 
 </string>
           </argument>
@@ -50,44 +50,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with(mainField)
+            <string>
+if mouse_check_button_pressed(mb_left) 
+&amp;&amp; point_distance(mouse_x,mouse_y,mainField.x,mainField.y)&lt;mainField.radius/4*global.scale
 {
-  if active &amp;&amp; keyboard_check_pressed(vk_space)
+  if mainField.state=0
   {
-    ringsTarget_y+=RING_H+RING_SEP
-    ringCurrent+=1
+    with(mainField)
+    {fieldIncrementState()}
   }
-  
-  if keyboard_check_pressed(vk_enter)
+  else
   {
-    with(field)
-    {
-      if active=2
-      {fieldScaleChange(scale+3)}
-    }
-    
-    switch(active)
-    {
-      case 0:
-      active=1
-      fieldRingsSpawn()
-      fieldScaleChange(1)
-      break
-      
-      case 1:
-      active=2
-      fieldScaleChange(3)
-      other.mainField=myField
-      with(myField)
-      {
-        active=1
-        fieldRingsSpawn()
-        fieldScaleChange(1)
-      }
-      break
-    }
-  } 
+    if player.state=0
+    {player.state=1}
+  }
 }
+
+
 </string>
           </argument>
         </arguments>
@@ -120,12 +99,14 @@ for(var i=0; i&lt;instance_number(field); i+=1)
   }
 }
 
-
 with(mainField)
 {fieldDraw()}
 
 with(mainField.myField)
 {fieldDraw()}
+
+with(player)
+{drawPlayer(other.mainField)}
 
 
 </string>

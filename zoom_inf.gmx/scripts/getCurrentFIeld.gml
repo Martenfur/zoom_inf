@@ -1,4 +1,4 @@
-///getCurrentFIeld()
+///getCurrentField()
 
 /*
 Returns current active field.

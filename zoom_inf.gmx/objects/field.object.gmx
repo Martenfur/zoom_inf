@@ -27,9 +27,11 @@
             <kind>1</kind>
             <string>///MAIN VARS
 
-rotation=0
+rotation=irandom(359)
 radius=FIELD_INTERNAL_H
-scale=   0
+scale=     0
+fieldScale=0
+
 scaleChange=0
 scaleChangeTar=0
 scaleChangeStart=0
@@ -38,7 +40,7 @@ fieldScaleChange(0.2)
 scaleChangeVal=0 //Value is in steps.
 scaleChangeTime=30
 
-//Rotation,
+//Rotation.
 rotationMin=0.5
 rotationMax=1
 rotationAdd=random_range(rotationMin,rotationMax)*chooseSign()
@@ -70,11 +72,18 @@ for(var i=0; i&lt;polygonCount i+=1)
   middleVector[i,1]=lengthdir_y(1,polygonAngle*(i+0.5))
 }
 
-active=0
+/*
+0 - inactive
+1 - active
+2 - background
+*/
+state=0
+
 myField=noone
 
 baseColor=make_color_hsv(irandom(255),irandom(255),127+irandom(128))
 ringColor=make_color_hsv(irandom(255),irandom(255),irandom(64))
+ringAdditionalColor=c_white
 
 </string>
           </argument>
@@ -104,7 +113,7 @@ rings_y=-RING_H
 ringsTarget_y=ringBase_y
 
 
-ringsAm=6//irandom_range(3,6)
+ringsAm=2//irandom_range(3,6)
 
 </string>
           </argument>
@@ -134,26 +143,28 @@ if scaleChange
 {
   scaleChangeVal+=1
   
-  scale=lerp(scaleChangeStart,
+  fieldScale=lerp(scaleChangeStart,
              scaleChangeTar,
              sqrt(scaleChangeVal/scaleChangeTime))  
  
   
   if scaleChangeVal&gt;=scaleChangeTime
   {
-    scale=scaleChangeTar
+    fieldScale=scaleChangeTar
     scaleChange=0
   }
 }
 
-if active=1
+
+
+if state=1
 {
   scaleMin=1
   
   if !scaleChange
   {
     lifetime+=1
-    scale=lerp(scaleBegin,scaleEnd,lifetime/lifetimeMax)
+    fieldScale=lerp(scaleBegin,scaleEnd,lifetime/lifetimeMax)
   }
 
   if rings_y&lt;ringsTarget_y
@@ -167,37 +178,18 @@ if active=1
   {myField=instance_create(x,y,field)}
 }
 
-if active=2
+scale=fieldScale*global.scale
+
+
+if state=2
 {
-  if scale&gt;8
+  if fieldScale&gt;8
   {
     instance_destroy()
-    show_debug_message("kekus")
+    //show_debug_message("kekus")
   }
 }
 </string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
           </argument>
         </arguments>
       </action>

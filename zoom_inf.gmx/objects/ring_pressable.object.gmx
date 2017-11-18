@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>ring</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,41 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>parentField=noone
+            <string>event_inherited()
 
-masks=ds_list_create()
+drawEvent=ringPressableDraw
 
-h=RING_H
 
-yscale=1
+var base_w=FIELD_INTERNAL_W-irandom_range(FIELD_INTERNAL_W/4,FIELD_INTERNAL_W/6)
+var mask_w=FIELD_INTERNAL_W-base_w
+var base_x=player.x+mask_w/2;
 
-distortion=1 //Level of distorion.
-distortion_h=1
+ringMaskAdd(base_x+base_w,mask_w)
+ringMaskAdd(base_x,base_w)
 
-drawEvent=ringDraw
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>ds_list_destroy(masks)
 
 </string>
           </argument>
@@ -83,12 +60,17 @@ drawEvent=ringDraw
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if y&gt;FIELD_INTERNAL_H
-{distortion=sqrt(y/FIELD_INTERNAL_H)}
-
-if y+h&gt;FIELD_INTERNAL_H
-{distortion_h=sqrt((y+h)/FIELD_INTERNAL_H)}  
-
+            <string>if ringControllable() &amp;&amp; mouse_check_button_pressed(mb_left)
+{
+  var dir=point_direction(parentField.x,parentField.y,mouse_x,mouse_y);
+  
+  var dist=point_distance(parentField.x,parentField.y,mouse_x,mouse_y)
+  var c=polarToField_xy(parentField,dist,dir);
+  if ringMaskCheckPoint(c[0],c[1],0)
+  {
+    ringMaskSetState(0,0)
+  }
+}
 </string>
           </argument>
         </arguments>
