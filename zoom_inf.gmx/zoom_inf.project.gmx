@@ -46,6 +46,7 @@
     </scripts>
     <script>scripts\getCurrentField.gml</script>
     <script>scripts\drawPlayer.gml</script>
+    <script>scripts\centerButtonGetPress.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\cntrl</object>

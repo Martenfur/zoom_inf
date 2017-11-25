@@ -25,9 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>mainField=instance_create(room_width/2,room_height/2,field)
+            <string>mainField=instance_create(0,0,field)
 instance_create(0,0,player)
 
+centerButtonPressed=0
 </string>
           </argument>
         </arguments>
@@ -51,8 +52,10 @@ instance_create(0,0,player)
           <argument>
             <kind>1</kind>
             <string>
-if mouse_check_button_pressed(mb_left) 
-&amp;&amp; point_distance(mouse_x,mouse_y,mainField.x,mainField.y)&lt;mainField.radius/4*global.scale
+centerButtonPressed=(mouse_check_button_pressed(mb_left) 
+                     &amp;&amp; point_distance(mouse_x,mouse_y,mainField.x,mainField.y)&lt;mainField.radius/4*global.scale)
+
+if centerButtonPressed
 {
   if mainField.state=0
   {

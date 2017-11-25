@@ -1,3 +1,5 @@
+
+
 draw_set_color(baseColor)
 
 draw_primitive_begin(pr_trianglefan)
@@ -9,12 +11,6 @@ for(var i=0; i<polygonCount i+=1)
 }
 
 draw_primitive_end()
-
-
-var _rr=point_distance(x,y,mouse_x,mouse_y),
-    _aa=point_direction(x,y,mouse_x,mouse_y);
-
-var arr=polarToField_xy(id,_rr,_aa);
 
 if state
 {

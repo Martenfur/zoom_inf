@@ -28,7 +28,36 @@
             <string>randomize()
 instance_create(0,0,game_cntrl)
 
-global.scale=0.5
+global.fullscreen=0
+
+if global.fullscreen
+{
+  global.scr_w=display_get_width()
+  global.scr_h=display_get_height()
+  window_set_fullscreen(1)
+}
+else
+{
+  global.scr_w=800
+  global.scr_h=600
+  window_set_size(global.scr_w,global.scr_h)
+}
+
+view_wview[0]=global.scr_w
+view_hview[0]=global.scr_h
+view_wport[0]=global.scr_w
+view_hport[0]=global.scr_h
+
+surface_resize(application_surface,global.scr_w,global.scr_h)
+
+global.scrSideMax=max(global.scr_w,global.scr_h)
+global.scrSideMin=min(global.scr_w,global.scr_h)
+
+global.cx=global.scr_w/2
+global.cy=global.scr_h/2
+
+
+global.scale=global.scrSideMin*(2/3)/(FIELD_INTERNAL_H*2)
 
 </string>
           </argument>

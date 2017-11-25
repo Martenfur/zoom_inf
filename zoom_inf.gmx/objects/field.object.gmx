@@ -137,7 +137,10 @@ ringsAm=2//irandom_range(3,6)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>rotation=valueBound(rotation+rotationAdd,360)
+            <string>x=global.cx
+y=global.cy
+
+rotation=valueBound(rotation+rotationAdd,360)
 
 if scaleChange
 {

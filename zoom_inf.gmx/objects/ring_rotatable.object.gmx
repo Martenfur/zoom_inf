@@ -65,7 +65,8 @@ rotated=0
   var fieldCur=getCurrentField();
   var dir=valueBound(point_direction(fieldCur.x,fieldCur.y,mouse_x,mouse_y)-fieldCur.rotation,360);
    
-  if mouse_check_button_pressed(mb_left)
+  if mouse_check_button_pressed(mb_left) 
+  &amp;&amp; !centerButtonGetPress()
   {
     rotated=1
     for(var i=0; i&lt;ringMaskCount() i+=1)

@@ -16,8 +16,10 @@ if state=1
 }
 
 with(field)
-if state=2
-{fieldScaleChange(scale+3)}
+{
+  if state=2
+  {fieldScaleChange(fieldScale*1.5)}
+}
 
 state+=1
 if state>2
