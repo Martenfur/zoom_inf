@@ -4,6 +4,6 @@
 Returns press of central button.
 */
 
-with(game_cntrl)
+with(cntrl)
 {return centerButtonPressed}
 

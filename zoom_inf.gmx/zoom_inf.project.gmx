@@ -36,17 +36,30 @@
         <script>scripts\ringMaskDraw.gml</script>
         <script>scripts\ringMaskCheckPoint.gml</script>
         <script>scripts\ringCheckPoint.gml</script>
+        <script>scripts\ringControllable.gml</script>
       </scripts>
       <scripts name="draw events">
         <script>scripts\ringDraw.gml</script>
         <script>scripts\ringPressableDraw.gml</script>
         <script>scripts\ringRotatableDraw.gml</script>
       </scripts>
-      <script>scripts\ringControllable.gml</script>
     </scripts>
-    <script>scripts\getCurrentField.gml</script>
+    <scripts name="layout">
+      <script>scripts\layoutCreate.gml</script>
+      <script>scripts\layoutItemAdd.gml</script>
+      <script>scripts\layoutGet_x.gml</script>
+      <script>scripts\layoutGet_y.gml</script>
+      <script>scripts\layoutDestroy.gml</script>
+    </scripts>
     <script>scripts\drawPlayer.gml</script>
+    <script>scripts\playerBash.gml</script>
+    <script>scripts\drawWorld.gml</script>
     <script>scripts\centerButtonGetPress.gml</script>
+    <script>scripts\world_x.gml</script>
+    <script>scripts\world_y.gml</script>
+    <script>scripts\sessionEnd.gml</script>
+    <script>scripts\scrUpdate.gml</script>
+    <script>scripts\buttonCreate.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\cntrl</object>
@@ -56,16 +69,34 @@
     <object>objects\ring_rotatable</object>
     <object>objects\ring_pressable</object>
     <object>objects\player</object>
+    <object>objects\menu_cntrl</object>
+    <object>objects\button</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="5">
+  <constants number="21">
     <constant name="FIELD_INTERNAL_W">1024</constant>
     <constant name="FIELD_INTERNAL_H">256</constant>
     <constant name="_RING_MASK_STRUCT_SIZE">3</constant>
     <constant name="RING_H">FIELD_INTERNAL_H/4</constant>
     <constant name="RING_SEP">FIELD_INTERNAL_H/8</constant>
+    <constant name="scr_w">global._scr_w</constant>
+    <constant name="scr_h">global._scr_h</constant>
+    <constant name="scr_orientation">global._scr_orientation</constant>
+    <constant name="world_w">global._world_w</constant>
+    <constant name="world_h">global._world_h</constant>
+    <constant name="world_side_min">global._world_side_min</constant>
+    <constant name="world_side_max">global._world_side_max</constant>
+    <constant name="world_scale">global._world_scale</constant>
+    <constant name="cx">global._cx</constant>
+    <constant name="cy">global._cy</constant>
+    <constant name="fullscreen">global._fullscreen</constant>
+    <constant name="m_x">global._m_x</constant>
+    <constant name="m_y">global._m_y</constant>
+    <constant name="m_r">global._m_r</constant>
+    <constant name="m_a">global._m_a</constant>
+    <constant name="mainField">global._mainField</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

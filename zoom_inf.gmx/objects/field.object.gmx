@@ -29,8 +29,7 @@
 
 rotation=irandom(359)
 radius=FIELD_INTERNAL_H
-scale=     0
-fieldScale=0
+scale=0
 
 scaleChange=0
 scaleChangeTar=0
@@ -38,7 +37,7 @@ scaleChangeStart=0
 fieldScaleChange(0.2)
 
 scaleChangeVal=0 //Value is in steps.
-scaleChangeTime=30
+scaleChangeTime=15
 
 //Rotation.
 rotationMin=0.5
@@ -47,7 +46,7 @@ rotationAdd=random_range(rotationMin,rotationMax)*chooseSign()
 //Rotation.
 
 //Scale.
-lifetimeMax=30*10
+lifetimeMax=30*5
 lifetime=0
 scaleBegin=1
 scaleEnd=1.5
@@ -107,6 +106,8 @@ ringAdditionalColor=c_white
             <kind>1</kind>
             <string>///RING CONTAINER
 
+rings=-1
+
 ringCurrent=0
 ringBase_y=RING_H+RING_SEP
 rings_y=-RING_H
@@ -137,8 +138,8 @@ ringsAm=2//irandom_range(3,6)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x=global.cx
-y=global.cy
+            <string>x=cx
+y=cy
 
 rotation=valueBound(rotation+rotationAdd,360)
 
@@ -146,14 +147,14 @@ if scaleChange
 {
   scaleChangeVal+=1
   
-  fieldScale=lerp(scaleChangeStart,
+  scale=lerp(scaleChangeStart,
              scaleChangeTar,
-             sqrt(scaleChangeVal/scaleChangeTime))  
+             sqrt(power(scaleChangeVal/scaleChangeTime,5)))  
  
   
   if scaleChangeVal&gt;=scaleChangeTime
   {
-    fieldScale=scaleChangeTar
+    scale=scaleChangeTar
     scaleChange=0
   }
 }
@@ -167,7 +168,7 @@ if state=1
   if !scaleChange
   {
     lifetime+=1
-    fieldScale=lerp(scaleBegin,scaleEnd,lifetime/lifetimeMax)
+    scale=lerp(scaleBegin,scaleEnd,lifetime/lifetimeMax)
   }
 
   if rings_y&lt;ringsTarget_y
@@ -179,17 +180,17 @@ if state=1
   
   if myField=noone
   {myField=instance_create(x,y,field)}
+  
+  if scale&gt;scaleEnd
+  {sessionEnd()}
 }
-
-scale=fieldScale*global.scale
-
 
 if state=2
 {
-  if fieldScale&gt;8
+  if scale&gt;8
   {
     instance_destroy()
-    //show_debug_message("kekus")
+    show_debug_message("kekus")
   }
 }
 </string>

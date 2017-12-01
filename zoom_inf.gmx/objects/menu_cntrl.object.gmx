@@ -25,7 +25,76 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///STATES
+
+/*
+Main states of menu object.
+*/
+stateMenu=0
+stateGameover=1
+stateSettings=2
+
+state=stateMenu
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///LAYOUTS
+
+l_menu=layoutCreate()
+
+layoutItemAdd(l_menu,0.5,0.5,0,0.5)
+
+buttonCreate("sup",l_menu,0,32,32,-1)
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DESTROYING LAYOUTS
+
+layoutDestroy(l_menu)
+
+
+</string>
           </argument>
         </arguments>
       </action>
@@ -48,18 +117,26 @@
           <argument>
             <kind>1</kind>
             <string>
-if centerButtonGetPress()
+if state=stateMenu
 {
-  if mainField.state=0
+  //Initializing game session.
+  if centerButtonGetPress()
   {
+    instance_create(0,0,game_cntrl)
+
+    instance_create(0,0,player)
     with(mainField)
     {fieldIncrementState(0)}
+  
+    instance_destroy()
   }
-  else
-  {
-    with(player)
-    {playerBash()}
-  }
+  //Initializing game session.
+}
+
+if state=stateGameover
+{
+  if centerButtonGetPress()
+  {state=stateMenu}
 }
 
 
@@ -85,9 +162,27 @@ if centerButtonGetPress()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///DRAWING WORLD
-
+            <string>
 drawWorld()
+
+draw_set_color(c_black)
+
+if state=stateMenu
+{
+  draw_text(32,32,"WHAT A SICK MENU WE GOT HERE, BIATCHEZ")
+}
+
+
+if state=stateGameover
+{
+  draw_text(32,32,"GUESS WHO'S A LOSER?")
+}
+
+draw_set_color(c_red)
+draw_circle(world_x(cx)+layoutGet_x(l_menu,0),
+            world_y(cy)+layoutGet_y(l_menu,0),8,0)
+
+
 </string>
           </argument>
         </arguments>

@@ -25,32 +25,19 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-base_y=mainField.ringBase_y+RING_H+RING_SEP
+            <string>w=32
+h=32
 
-y=base_y
+scale=1
 
-goTime=5
-goVal=0
+onClick=-1
 
-returnTime=10
-returnVal=0
+clicked=0
 
+myLayout=-1
+myLayoutId=0
 
-//spd=15
-
-
-/*
-0 - still
-1 - bashing
-2 - returning
-*/
-state=0
-
-size=16
-
-bufferedInputTime=3
-bufferedInputAl=-1
+myParent=noone
 
 
 </string>
@@ -76,57 +63,49 @@ bufferedInputAl=-1
           <argument>
             <kind>1</kind>
             <string>
-if bufferedInputAl&gt;-1
-{bufferedInputAl-=1}
-if bufferedInputAl=0 &amp;&amp; state!=1
-{state=1}
-
-if state=1
+clicked=0
+if point_in_rectangle(m_x,m_y,cx+x-w/2,cy+y-h/2,cx+x+w/2,cy+y+h/2)
 {
-  //y-=spd
-  
-  goVal+=1
-  y=lerp(base_y,0,goVal/goTime)
-  
-  var _collision=noone;
-  
-  with(mainField)
-  {
-    for(var i=0; i&lt;ringsAm i+=1)
-    {
-      with(rings[i])
-      {_collision=ringCheckPoint(player.x,player.y)} 
-      if _collision!=noone
-      {
-        if _collision!=rings[ringCurrent]
-        {fieldRingsAdvance()}
-        other.y=_collision.y+RING_H
-        other.state=2
-        break
-      }
-    }
-  }
-  
-  if y&lt;=0
-  {
-    with(mainField)
-    {fieldIncrementState(0)}
-    state=2
-  }
+  clicked=1
+  if onClick!=-1
+  {script_execute(onClick,myParent,id)}
 }
 
-if state=2
-{
-  goVal=0
 
-  y+=max(1,(base_y-y)/3)
-  
-  if y&gt;=base_y
-  {
-    state=0
-    y=base_y
-  }
-}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+draw_set_color(c_red)
+
+var _lx=layoutGet_x(myLayout,myLayoutId),
+    _ly=layoutGet_y(myLayout,myLayoutId);
+
+draw_rectangle((world_x(cx-w/2)+_lx)*scale,(world_y(cy-h/2)+_ly)*scale,
+               (world_x(cx+w/2)+_lx)*scale,(world_y(cy+h/2)+_ly)*scale,0)
+
+               
+               show_debug_message(world_scale)
 </string>
           </argument>
         </arguments>

@@ -4,10 +4,10 @@
 Tells if ring can be controlled by the player.
 */
 
-with(game_cntrl)
+with(mainField)
 {
-  if mainField.ringCurrent<mainField.ringsAm
-  {return (mainField.ringsAm>0 && mainField.rings[mainField.ringCurrent]==other.id)} 
+  if rings!=-1 && ringCurrent<ringsAm
+  {return (ringsAm>0 && rings[ringCurrent]==other.id)} 
 }
 
 return 0

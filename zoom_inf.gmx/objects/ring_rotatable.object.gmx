@@ -62,8 +62,7 @@ rotated=0
             <kind>1</kind>
             <string>if ringControllable()
 {
-  var fieldCur=getCurrentField();
-  var dir=valueBound(point_direction(fieldCur.x,fieldCur.y,mouse_x,mouse_y)-fieldCur.rotation,360);
+  var dir=valueBound(m_a-mainField.rotation,360);
    
   if mouse_check_button_pressed(mb_left) 
   &amp;&amp; !centerButtonGetPress()

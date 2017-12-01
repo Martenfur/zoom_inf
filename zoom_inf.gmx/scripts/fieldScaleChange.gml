@@ -2,7 +2,7 @@
 
 scaleChange=1
 scaleChangeTar=argument0
-scaleChangeStart=fieldScale
+scaleChangeStart=scale
 scaleChangeVal=0
 
 

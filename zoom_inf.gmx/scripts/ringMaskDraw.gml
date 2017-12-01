@@ -3,9 +3,6 @@
 var _field=argument0,
     _maskId=argument1;
 
-if keyboard_check(ord('S'))
-draw_primitive_begin(pr_linestrip)
-else
 draw_primitive_begin(pr_trianglestrip)
 
 var _mx,_mw;
@@ -22,10 +19,10 @@ var _sector1Id=_mx div (_field.field_w/_field.polygonCount),
 var _polar1=fieldToPolar_xy(_field,_mx,y);
 var _polar2=fieldToPolar_xy(_field,_mx,y+h);
 
-draw_vertex(_field.x+lengthdir_x(_polar1[1]*distortion,_polar1[0]),
-            _field.y+lengthdir_y(_polar1[1]*distortion,_polar1[0]))
-draw_vertex(_field.x+lengthdir_x(_polar2[1]*distortion_h,_polar2[0]),
-            _field.y+lengthdir_y(_polar2[1]*distortion_h,_polar2[0]))
+draw_vertex(world_x(_field.x+lengthdir_x(_polar1[1]*distortion,_polar1[0])),
+            world_y(_field.y+lengthdir_y(_polar1[1]*distortion,_polar1[0])))
+draw_vertex(world_x(_field.x+lengthdir_x(_polar2[1]*distortion_h,_polar2[0])),
+            world_y(_field.y+lengthdir_y(_polar2[1]*distortion_h,_polar2[0])))
 
 
 var _lx,_ly,_y,_yh;
@@ -39,17 +36,17 @@ for(var i=1+_sector1Id; i<=_sector2Id i+=1)
   _ly=lengthdir_y(_field.radius*_field.scale/_field.field_h,
                   _field.rotation+_field.polygonAngle*i)
               
-  draw_vertex(_field.x+_lx*_y,_field.y+_ly*_y)
-  draw_vertex(_field.x+_lx*_yh,_field.y+_ly*_yh)
+  draw_vertex(world_x(_field.x+_lx*_y),world_y(_field.y+_ly*_y))
+  draw_vertex(world_x(_field.x+_lx*_yh),world_y(_field.y+_ly*_yh))
 }
 
 _polar1=fieldToPolar_xy(_field,_mx+_mw,y)
 _polar2=fieldToPolar_xy(_field,_mx+_mw,y+h)
 
-draw_vertex(_field.x+lengthdir_x(_polar1[1]*distortion,_polar1[0]),
-            _field.y+lengthdir_y(_polar1[1]*distortion,_polar1[0]))
-draw_vertex(_field.x+lengthdir_x(_polar2[1]*distortion_h,_polar2[0]),
-            _field.y+lengthdir_y(_polar2[1]*distortion_h,_polar2[0]))
+draw_vertex(world_x(_field.x+lengthdir_x(_polar1[1]*distortion,_polar1[0])),
+            world_y(_field.y+lengthdir_y(_polar1[1]*distortion,_polar1[0])))
+draw_vertex(world_x(_field.x+lengthdir_x(_polar2[1]*distortion_h,_polar2[0])),
+            world_y(_field.y+lengthdir_y(_polar2[1]*distortion_h,_polar2[0])))
 
 
 draw_primitive_end()

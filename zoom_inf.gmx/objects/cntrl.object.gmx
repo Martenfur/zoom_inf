@@ -26,38 +26,110 @@
           <argument>
             <kind>1</kind>
             <string>randomize()
-instance_create(0,0,game_cntrl)
+instance_create(0,0,menu_cntrl)
 
-global.fullscreen=0
+fullscreen=0
 
-if global.fullscreen
-{
-  global.scr_w=display_get_width()
-  global.scr_h=display_get_height()
-  window_set_fullscreen(1)
-}
-else
-{
-  global.scr_w=800
-  global.scr_h=600
-  window_set_size(global.scr_w,global.scr_h)
-}
+window_w=800
+window_h=600
 
-view_wview[0]=global.scr_w
-view_hview[0]=global.scr_h
-view_wport[0]=global.scr_w
-view_hport[0]=global.scr_h
-
-surface_resize(application_surface,global.scr_w,global.scr_h)
-
-global.scrSideMax=max(global.scr_w,global.scr_h)
-global.scrSideMin=min(global.scr_w,global.scr_h)
-
-global.cx=global.scr_w/2
-global.cy=global.scr_h/2
+scrUpdate()
 
 
-global.scale=global.scrSideMin*(2/3)/(FIELD_INTERNAL_H*2)
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///MOUSE
+
+m_x=     0
+m_y=     0
+m_r=     0
+m_a=     0
+global.mPress=  0
+global.mHold=   0
+global.mRelease=0
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///CENTRAL BUTTON
+
+centerButtonPressed=0
+centerButton_r=FIELD_INTERNAL_H/4
+
+mainField=instance_create(0,0,field)
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///MOUSE
+
+m_x=mouse_x/world_scale
+m_y=mouse_y/world_scale
+
+m_a=point_direction(cx,cy,m_x,m_y)
+m_r=point_distance(cx,cy,m_x,m_y)
+
+global.mPress=  mouse_check_button_pressed(mb_left)
+global.mHold=   mouse_check_button(mb_left)
+global.mRelease=mouse_check_button_released(mb_left)
+
+
+centerButtonPressed=(global.mPress &amp;&amp; m_r&lt;centerButton_r)
 
 </string>
           </argument>
@@ -81,9 +153,33 @@ global.scale=global.scrSideMin*(2/3)/(FIELD_INTERNAL_H*2)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check(ord('R'))
+            <string>///DEBUG
+
+if keyboard_check(ord('R'))
 {game_restart()}
 
+if keyboard_check(ord('S'))
+{room_speed=5}
+else
+{room_speed=30}
+
+if keyboard_check(vk_escape)
+{game_end()}
+
+if keyboard_check_pressed(ord('F'))
+{
+  if !scr_orientation
+  {
+    window_w=800
+    window_h=600
+  }
+  else
+  {
+    window_w=600
+    window_h=800
+  }
+  scrUpdate()
+}
 </string>
           </argument>
         </arguments>

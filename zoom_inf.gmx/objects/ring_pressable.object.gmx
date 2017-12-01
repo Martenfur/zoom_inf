@@ -62,14 +62,9 @@ ringMaskAdd(base_x,base_w)
             <kind>1</kind>
             <string>if ringControllable() &amp;&amp; mouse_check_button_pressed(mb_left)
 {
-  var dir=point_direction(parentField.x,parentField.y,mouse_x,mouse_y);
-  
-  var dist=point_distance(parentField.x,parentField.y,mouse_x,mouse_y)
-  var c=polarToField_xy(parentField,dist,dir);
+  var c=polarToField_xy(parentField,m_r,m_a);
   if ringMaskCheckPoint(c[0],c[1],0)
-  {
-    ringMaskSetState(0,0)
-  }
+  {ringMaskSetState(0,0)}
 }
 </string>
           </argument>
