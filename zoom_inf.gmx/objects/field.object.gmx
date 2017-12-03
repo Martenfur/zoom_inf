@@ -228,7 +228,7 @@ if state=1
 {
   scaleMin=1
   
-  if !scaleChange
+  if !scaleChange &amp;&amp; instance_exists(game_cntrl)
   {
     lifetime+=1
     scale=lerp(scaleBegin,scaleEnd,lifetime/lifetimeMax)
@@ -250,7 +250,7 @@ if state=1
 
 if state=2
 {
-  if scale&gt;8
+  if scale&gt;8 &amp;&amp; instance_exists(game_cntrl)
   {instance_destroy()}
 }
 

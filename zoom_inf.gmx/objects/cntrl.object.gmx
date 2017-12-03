@@ -69,7 +69,12 @@ for(var i=0; 1 i+=1)
             <string>randomize()
 instance_create(0,0,menu_cntrl)
 
-fullscreen=0
+mobile=(os_type==os_android)
+
+if mobile
+{fullscreen=1}
+else
+{fullscreen=0} //Whatever.
 
 window_w=800
 window_h=600
@@ -84,7 +89,7 @@ bloomblurSize=shader_get_uniform(shdr_bloom,"blurSize")
 
 paused=0
 
-if os_type=os_android
+if mobile
 {vk_back=vk_backspace}
 else
 {vk_back=vk_escape}
@@ -189,6 +194,34 @@ global.mRelease=mouse_check_button_released(mb_left)
 
 
 centerButtonPressed=(global.mPress &amp;&amp; m_r&lt;centerButton_r)
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//SCREEN RESIZE
+
+if scr_w!=display_get_width() 
+|| scr_h!=display_get_height()
+{
+  scrUpdate()
+}
 
 </string>
           </argument>

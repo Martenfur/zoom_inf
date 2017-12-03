@@ -215,7 +215,7 @@ if state=stateMenu
   {menuMenuButtonsCreate()}
 
   //Initializing game session.
-  if centerButtonGetPress()
+  if centerButtonGetPress() &amp;&amp; !instance_exists(game_cntrl)
   {sessionStart()}
   //Initializing game session.
 }
