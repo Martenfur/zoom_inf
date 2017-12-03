@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>ring</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,29 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited()
-
-drawEvent=ringRotatableDraw
-
-var gapSize=irandom_range(FIELD_INTERNAL_W/4,FIELD_INTERNAL_W/6);
-
-var px=0;
-if instance_exists(player)
-{px=player.x}
-
-ringMaskAdd(px+irandom(gapSize)+FIELD_INTERNAL_W/2,FIELD_INTERNAL_W-gapSize)
-
-angStart=0
-for(var i=0; i&lt;ringMaskCount() i+=1)
-{mask_xstart[i]=0}
-rotated=0
-
+            <string>application_surface_draw_enable(0);
+bloomIntensity = shader_get_uniform(shdr_bloom, 'intensity');
+bloomblurSize = shader_get_uniform(shdr_bloom, 'blurSize');
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="8" enumb="75">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -64,28 +50,12 @@ rotated=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ringControllable()
-{
-  var dir=valueBound(m_a-mainField.rotation,360);
-   
-  if mouse_check_button_pressed(mb_left) 
-  &amp;&amp; !centerButtonGetPress()
-  {
-    rotated=1
-    for(var i=0; i&lt;ringMaskCount() i+=1)
-    {mask_xstart[i]=ringMaskGet_x(i)}
-    angStart=dir
-  }
-  if mouse_check_button(mb_left) &amp;&amp; rotated
-  {
-    var diff=angle_difference(dir,angStart)/360*FIELD_INTERNAL_W
-     
-    for(var i=0; i&lt;ringMaskCount() i+=1)
-    {ringMaskSet_x(i,mask_xstart[i]+diff)} 
-  }
-  else
-  {rotated=0}
-}
+            <string>shader_set(shdr_bloom);
+shader_set_uniform_f(bloomIntensity, ((window_mouse_get_y()-250)/100)); //0 = off, 1 = a bit, 80 = extremely intense
+//shader_set_uniform_f(bloomblurSize, ((window_mouse_get_x()-250)/1000)); // usually something like 1/512 (0.001)
+shader_set_uniform_f(bloomblurSize, 1/512);
+draw_surface(application_surface, 0, 0);
+shader_reset();
 </string>
           </argument>
         </arguments>

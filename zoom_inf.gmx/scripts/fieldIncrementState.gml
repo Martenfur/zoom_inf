@@ -14,7 +14,8 @@ if state=0
 if state=1
 {
   fieldScaleChange(3)
-  player.x=valueBound(player.x+(-myField.rotation+mainField.rotation)/360*FIELD_INTERNAL_W,FIELD_INTERNAL_W)
+  if instance_exists(player)
+  {player.x=valueBound(player.x+(-myField.rotation+mainField.rotation)/360*FIELD_INTERNAL_W,FIELD_INTERNAL_W)}
   mainField=myField
   if !argument0
   {

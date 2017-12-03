@@ -1,4 +1,4 @@
-//layoutItemAdd(layout,hx,hy,vx,vy)
+///layoutItemAdd(layout,hx,hy,vx,vy)
 
 /*
 Adds new item to the layout.

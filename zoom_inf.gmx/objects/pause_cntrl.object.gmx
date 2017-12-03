@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>ring</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,22 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited()
-
-drawEvent=ringRotatableDraw
-
-var gapSize=irandom_range(FIELD_INTERNAL_W/4,FIELD_INTERNAL_W/6);
-
-var px=0;
-if instance_exists(player)
-{px=player.x}
-
-ringMaskAdd(px+irandom(gapSize)+FIELD_INTERNAL_W/2,FIELD_INTERNAL_W-gapSize)
-
-angStart=0
-for(var i=0; i&lt;ringMaskCount() i+=1)
-{mask_xstart[i]=0}
-rotated=0
+            <string>paused=1
+io_clear()
 
 </string>
           </argument>
@@ -64,28 +50,46 @@ rotated=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ringControllable()
+            <string>
+if keyboard_check_pressed(vk_back)
 {
-  var dir=valueBound(m_a-mainField.rotation,360);
-   
-  if mouse_check_button_pressed(mb_left) 
-  &amp;&amp; !centerButtonGetPress()
-  {
-    rotated=1
-    for(var i=0; i&lt;ringMaskCount() i+=1)
-    {mask_xstart[i]=ringMaskGet_x(i)}
-    angStart=dir
-  }
-  if mouse_check_button(mb_left) &amp;&amp; rotated
-  {
-    var diff=angle_difference(dir,angStart)/360*FIELD_INTERNAL_W
-     
-    for(var i=0; i&lt;ringMaskCount() i+=1)
-    {ringMaskSet_x(i,mask_xstart[i]+diff)} 
-  }
-  else
-  {rotated=0}
+  sessionEnd(0)
+  paused=0
+  instance_destroy()
 }
+
+if global.mRelease
+{
+  paused=0
+  instance_destroy()
+}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="73">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_set_color(mainField.ringAdditionalColor)
+draw_text(world_x(cx),world_y(cy),"PAUSE")
+
 </string>
           </argument>
         </arguments>

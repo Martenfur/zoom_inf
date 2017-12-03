@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -29,6 +29,7 @@
 h=32
 
 scale=1
+alpha=1
 
 onClick=-1
 
@@ -39,6 +40,9 @@ myLayoutId=0
 
 myParent=noone
 
+blocked=0
+
+text="button"
 
 </string>
           </argument>
@@ -64,12 +68,18 @@ myParent=noone
             <kind>1</kind>
             <string>
 clicked=0
-if point_in_rectangle(m_x,m_y,cx+x-w/2,cy+y-h/2,cx+x+w/2,cy+y+h/2)
+
+var _lx=layoutGet_x(myLayout,myLayoutId)/world_scale,
+    _ly=layoutGet_y(myLayout,myLayoutId)/world_scale;
+
+if global.mRelease &amp;&amp; !blocked 
+&amp;&amp; point_in_rectangle(m_x,m_y,cx-w/2+_lx,cy-h/2+_ly,cx+w/2+_lx,cy+h/2+_ly)
 {
   clicked=1
   if onClick!=-1
-  {script_execute(onClick,myParent,id)}
+  {script_execute(onClick,myParent)}
 }
+
 
 
 
@@ -96,16 +106,34 @@ if point_in_rectangle(m_x,m_y,cx+x-w/2,cy+y-h/2,cx+x+w/2,cy+y+h/2)
           <argument>
             <kind>1</kind>
             <string>
-draw_set_color(c_red)
+if instance_exists(myParent)
+{
+  scale=lerp(1,4,sqr(myParent.transitionVal))
+  alpha=lerp(1,0,myParent.transitionVal)
+}
+
+draw_set_alpha(alpha)
+
+draw_set_color(mainField.ringAdditionalColor)
 
 var _lx=layoutGet_x(myLayout,myLayoutId),
     _ly=layoutGet_y(myLayout,myLayoutId);
 
-draw_rectangle((world_x(cx-w/2)+_lx)*scale,(world_y(cy-h/2)+_ly)*scale,
-               (world_x(cx+w/2)+_lx)*scale,(world_y(cy+h/2)+_ly)*scale,0)
+draw_rectangle(world_x(cx)+(world_x(-w/2)+_lx)*scale,
+               world_y(cy)+(world_y(-h/2)+_ly)*scale,
+               world_x(cx)+(world_x(+w/2)+_lx)*scale,
+               world_y(cy)+(world_y(+h/2)+_ly)*scale,0)
 
-               
-               show_debug_message(world_scale)
+
+draw_set_color(mainField.baseColor)
+draw_set_halign(fa_center)
+draw_set_valign(fa_center)
+
+draw_text_transformed(world_x(cx)+_lx*scale,world_y(cy)+_ly*scale,text,scale,scale,0)
+
+draw_set_alpha(1)
+
+              
 </string>
           </argument>
         </arguments>

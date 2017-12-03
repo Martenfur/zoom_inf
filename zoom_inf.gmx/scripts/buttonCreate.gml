@@ -12,6 +12,7 @@ _button.myLayoutId=argument2
 _button.w=         argument3
 _button.h=         argument4
 _button.onClick=   argument5
+_button.myParent=  id
 
 return _button
 

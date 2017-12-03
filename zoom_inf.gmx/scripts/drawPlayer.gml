@@ -1,7 +1,9 @@
 ///drawPlayer(field)
 
+draw_set_color(argument0.ringAdditionalColor)
+
 var _c=fieldToPolar_xy(argument0,x,y);
-var _c1=fieldToPolar_xy(argument0,x,yprevious);
+var _c1=fieldToPolar_xy(argument0,x,yprev);
 
 
 var _lx=lengthdir_x(1,_c[0]),

@@ -25,12 +25,77 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>destroy=0
+
+destroyTime=10
+destroyAl=destroyTime
+
+destroyVal=0
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///PROGRESS BAR
+
+pbarColor=mainField.ringAdditionalColor
+pbarColorPrev=mainField.ringAdditionalColor
+pbarColorRes=0
+
+mainFieldPrev=mainField
+
+pbarColorTransitionSpd=0.1
+pbarColorTransitionVal=1
+
+pbarVal=1
+
+pbar_h=world_side_min/20
+
+score_cur=0
+
+</string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>408</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>-1</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>paused</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -62,6 +127,77 @@ if centerButtonGetPress()
   }
 }
 
+if keyboard_check_pressed(vk_back)
+{instance_create(0,0,pause_cntrl)}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///PROGRESS BAR
+
+pbarColor=mainField.ringAdditionalColor
+
+if mainField!=mainFieldPrev
+{pbarColorTransitionVal=0}
+
+mainFieldPrev=mainField
+
+if pbarColorTransitionVal=1
+{pbarColoPrevr=mainField.ringAdditionalColor}
+
+pbarColorTransitionVal+=pbarColorTransitionSpd
+if pbarColorTransitionVal&gt;1
+{pbarColorTransitionVal=1}
+
+pbarColorRes=merge_color(pbarColorPrev,pbarColor,pbarColorTransitionVal)
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//DESTROYING
+
+destroyVal=destroyAl/destroyTime
+
+if destroy &amp;&amp; destroyAl&gt;-1
+{destroyAl-=1}
+
+if destroyAl=0
+{instance_destroy()}
 
 </string>
           </argument>
@@ -88,6 +224,19 @@ if centerButtonGetPress()
             <string>///DRAWING WORLD
 
 drawWorld()
+
+draw_set_color(pbarColorRes)
+
+var pbarScore;
+
+if score_high=0
+{pbarScore=0}
+else
+{pbarScore=min(1,score_cur/score_high)}
+
+draw_rectangle(0,0,scr_w*pbarScore,world_y(pbar_h)*pbarVal*destroyVal,0)
+
+
 </string>
           </argument>
         </arguments>

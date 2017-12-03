@@ -80,9 +80,22 @@ state=0
 
 myField=noone
 
+/*
 baseColor=make_color_hsv(irandom(255),irandom(255),127+irandom(128))
 ringColor=make_color_hsv(irandom(255),irandom(255),irandom(64))
 ringAdditionalColor=c_white
+*/
+
+var _paletteCur=irandom(cntrl.palettesAm-1);
+
+baseColor=cntrl.palette[_paletteCur,0]
+ringColor=cntrl.palette[_paletteCur,1]
+ringAdditionalColor=cntrl.palette[_paletteCur,2]
+
+ringAdditionalColor1=cntrl.palette[_paletteCur,2]
+ringAdditionalColor2=cntrl.palette[_paletteCur,3]
+ringAdditionalColorVal=0
+
 
 </string>
           </argument>
@@ -114,7 +127,7 @@ rings_y=-RING_H
 ringsTarget_y=ringBase_y
 
 
-ringsAm=2//irandom_range(3,6)
+ringsAm=irandom_range(2,4)
 
 </string>
           </argument>
@@ -138,9 +151,59 @@ ringsAm=2//irandom_range(3,6)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x=cx
+            <string>///COLOR AND POSITION CHANGE
+
+ringAdditionalColorVal+=5
+if ringAdditionalColorVal&gt;359
+{ringAdditionalColorVal-=360}
+
+ringAdditionalColor=merge_color(ringAdditionalColor1,ringAdditionalColor2,lengthdir_y(0.5,ringAdditionalColorVal)+0.5)
+
+
+x=cx
 y=cy
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>408</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>-1</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>paused</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
 rotation=valueBound(rotation+rotationAdd,360)
 
 if scaleChange
@@ -182,17 +245,15 @@ if state=1
   {myField=instance_create(x,y,field)}
   
   if scale&gt;scaleEnd
-  {sessionEnd()}
+  {sessionEnd(1)}
 }
 
 if state=2
 {
   if scale&gt;8
-  {
-    instance_destroy()
-    show_debug_message("kekus")
-  }
+  {instance_destroy()}
 }
+
 </string>
           </argument>
         </arguments>

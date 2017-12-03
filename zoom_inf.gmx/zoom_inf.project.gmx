@@ -3,7 +3,28 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <NewExtensions/>
+  <datafiles number="1" name="datafiles">
+    <datafile>
+      <name>palettes.txt</name>
+      <exists>-1</exists>
+      <size>0</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>palettes.txt</filename>
+    </datafile>
+  </datafiles>
+  <NewExtensions>
+    <extension index="0">extensions\Bloom shader</extension>
+  </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites"/>
   <backgrounds name="background"/>
@@ -57,25 +78,57 @@
     <script>scripts\centerButtonGetPress.gml</script>
     <script>scripts\world_x.gml</script>
     <script>scripts\world_y.gml</script>
+    <script>scripts\sessionStart.gml</script>
     <script>scripts\sessionEnd.gml</script>
     <script>scripts\scrUpdate.gml</script>
-    <script>scripts\buttonCreate.gml</script>
+    <scripts name="menu">
+      <scripts name="button creators">
+        <script>scripts\menuMenuButtonsCreate.gml</script>
+        <script>scripts\menuSettingsButtonsCreate.gml</script>
+        <script>scripts\menuGameoverButtonsCreate.gml</script>
+      </scripts>
+      <scripts name="button scripts">
+        <script>scripts\buttonSettingsClick.gml</script>
+        <script>scripts\buttonLeaderboardsClick.gml</script>
+        <script>scripts\buttonSettingsBackClick.gml</script>
+        <script>scripts\buttonSettingsMusicClick.gml</script>
+        <script>scripts\buttonGameoverBackClick.gml</script>
+      </scripts>
+      <script>scripts\buttonCreate.gml</script>
+      <script>scripts\menuButtonsDelete.gml</script>
+      <script>scripts\menuStateTransition.gml</script>
+      <script>scripts\menuStateInstantTransition.gml</script>
+    </scripts>
+    <script>scripts\strToColor.gml</script>
+    <script>scripts\gameLoad.gml</script>
+    <script>scripts\gameSave.gml</script>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shdr_bloom.shader</shader>
+  </shaders>
+  <fonts name="fonts">
+    <font>fonts\font_main</font>
+  </fonts>
   <objects name="objects">
-    <object>objects\cntrl</object>
-    <object>objects\game_cntrl</object>
+    <objects name="controllers">
+      <object>objects\cntrl</object>
+      <object>objects\game_cntrl</object>
+      <object>objects\menu_cntrl</object>
+      <object>objects\pause_cntrl</object>
+    </objects>
+    <objects name="rings">
+      <object>objects\ring</object>
+      <object>objects\ring_rotatable</object>
+      <object>objects\ring_pressable</object>
+    </objects>
     <object>objects\field</object>
-    <object>objects\ring</object>
-    <object>objects\ring_rotatable</object>
-    <object>objects\ring_pressable</object>
     <object>objects\player</object>
-    <object>objects\menu_cntrl</object>
     <object>objects\button</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
-  <constants number="21">
+  <constants number="27">
     <constant name="FIELD_INTERNAL_W">1024</constant>
     <constant name="FIELD_INTERNAL_H">256</constant>
     <constant name="_RING_MASK_STRUCT_SIZE">3</constant>
@@ -97,6 +150,12 @@
     <constant name="m_r">global._m_r</constant>
     <constant name="m_a">global._m_a</constant>
     <constant name="mainField">global._mainField</constant>
+    <constant name="paused">global._paused</constant>
+    <constant name="vk_back">global._vk_back</constant>
+    <constant name="score_high">global._score_high</constant>
+    <constant name="score_cur">global._score_cur</constant>
+    <constant name="score_prev">global._score_prev</constant>
+    <constant name="music_enabled">global._music_enabled</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

@@ -30,12 +30,24 @@
 /*
 Main states of menu object.
 */
-stateMenu=0
-stateGameover=1
-stateSettings=2
+stateMenu=          0
+stateGameover=      1
+stateSettings=      2
+stateSessionStarted=3
+
+stateChanged=0
 
 state=stateMenu
 
+transition=1
+transitionState=1
+
+transitionVal=1 //0..1
+
+transitionTime=5 //Time in steps it will take for the full transition.
+transitionAl=transitionTime
+
+transitionFinalState=stateMenu //State which will be taken in the end of transition.
 
 
 
@@ -62,10 +74,20 @@ state=stateMenu
             <string>///LAYOUTS
 
 l_menu=layoutCreate()
+layoutItemAdd(l_menu,-0.5,0.75,0,0.5)
+layoutItemAdd(l_menu,0.5,0.75,0,0.75)
 
-layoutItemAdd(l_menu,0.5,0.5,0,0.5)
+l_settings=layoutCreate()
+layoutItemAdd(l_settings,0,-0.25)
+layoutItemAdd(l_settings,0,0.25)
 
-buttonCreate("sup",l_menu,0,32,32,-1)
+l_gameover=layoutCreate()
+layoutItemAdd(l_gameover,0.7,0.9)
+
+
+myButtons=ds_list_create()
+
+menuMenuButtonsCreate()
 
 </string>
           </argument>
@@ -90,6 +112,10 @@ buttonCreate("sup",l_menu,0,32,32,-1)
           <argument>
             <kind>1</kind>
             <string>///DESTROYING LAYOUTS
+
+menuButtonsDelete()
+
+ds_list_destroy(myButtons)
 
 layoutDestroy(l_menu)
 
@@ -116,30 +142,102 @@ layoutDestroy(l_menu)
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///TRANSITION
+
+stateChanged=0
+
+if transition
+{
+  transitionAl-=1
+  
+  if transitionState=0
+  {transitionVal=lerp(1,0,transitionAl/transitionTime)}
+  else
+  {transitionVal=lerp(0,1,transitionAl/transitionTime)}
+  
+  if transitionAl&lt;=0
+  {
+    //Half.
+    if transitionState=0
+    {
+      state=transitionFinalState
+      
+      transitionAl=transitionTime/2
+      transitionState+=1
+      stateChanged=1
+    }
+    //Half.
+    else
+    //Full.
+    {
+      transition=0
+      transitionState=0
+      transitionAl=0
+    }
+    //Full.
+  }
+  
+}
+else
+{
+  //Defaulting transition vars.
+  transitionVal=0
+  transitionAl=0
+  transitionState=0
+  //Defaulting transition vars.
+}
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>
 if state=stateMenu
 {
+  if stateChanged
+  {menuMenuButtonsCreate()}
+
   //Initializing game session.
   if centerButtonGetPress()
-  {
-    instance_create(0,0,game_cntrl)
-
-    instance_create(0,0,player)
-    with(mainField)
-    {fieldIncrementState(0)}
-  
-    instance_destroy()
-  }
+  {sessionStart()}
   //Initializing game session.
+}
+
+if state=stateSettings
+{
+  if stateChanged
+  {menuSettingsButtonsCreate()}
 }
 
 if state=stateGameover
 {
-  if centerButtonGetPress()
-  {state=stateMenu}
+  //Initializing game session.
+  if centerButtonGetPress() &amp;&amp; !instance_exists(game_cntrl)
+  {sessionStart()}
+  //Initializing game session.
 }
 
-
+if state=stateSessionStarted
+{  
+  instance_destroy()
+}
 </string>
           </argument>
         </arguments>
@@ -165,22 +263,19 @@ if state=stateGameover
             <string>
 drawWorld()
 
-draw_set_color(c_black)
-
+draw_set_color(mainField.ringAdditionalColor)
+/*
 if state=stateMenu
 {
-  draw_text(32,32,"WHAT A SICK MENU WE GOT HERE, BIATCHEZ")
+
 }
-
-
+*/
+draw_text(world_x(cx),world_y(cy),string(score_prev)+"/"+string(score_high))
+/*  
 if state=stateGameover
 {
-  draw_text(32,32,"GUESS WHO'S A LOSER?")
-}
-
-draw_set_color(c_red)
-draw_circle(world_x(cx)+layoutGet_x(l_menu,0),
-            world_y(cy)+layoutGet_y(l_menu,0),8,0)
+  draw_text(world_x(cx),world_y(cy),score_prev)
+}*/
 
 
 </string>

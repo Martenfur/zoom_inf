@@ -52,6 +52,8 @@ size=16
 bufferedInputTime=3
 bufferedInputAl=-1
 
+xprev=x
+yprev=y
 
 </string>
           </argument>
@@ -59,6 +61,26 @@ bufferedInputAl=-1
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>408</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>-1</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_if</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>-1</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>paused</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -75,7 +97,9 @@ bufferedInputAl=-1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>xprev=x
+yprev=y
+
 if bufferedInputAl&gt;-1
 {bufferedInputAl-=1}
 if bufferedInputAl=0 &amp;&amp; state!=1
@@ -112,6 +136,7 @@ if state=1
     with(mainField)
     {fieldIncrementState(0)}
     state=2
+    score_cur+=1
   }
 }
 
@@ -127,6 +152,8 @@ if state=2
     y=base_y
   }
 }
+
+
 </string>
           </argument>
         </arguments>
