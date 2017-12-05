@@ -21,8 +21,8 @@ with(argument0)
   /////////////////////////////////////////////////////////
   
   //y
-  var _x=lengthdir_x(argument1/scale,_a),
-      _y=lengthdir_y(argument1/scale,_a);
+  var _x=lengthdir_x(argument1/scaleRes,_a),
+      _y=lengthdir_y(argument1/scaleRes,_a);
   
   _coordinates[1]=proj(_x,
                        _y,

@@ -1,8 +1,8 @@
 ///ringMaskDraw(field,mask_id)
 
 var _field=argument0,
-    _maskId=argument1;
-
+    _maskId=argument1;  
+    
 draw_primitive_begin(pr_trianglestrip)
 
 var _mx,_mw;
@@ -31,9 +31,9 @@ _yh=max(0,y+h)*distortion_h
 
 for(var i=1+_sector1Id; i<=_sector2Id i+=1)
 {
-  _lx=lengthdir_x(_field.radius*_field.scale/_field.field_h,
+  _lx=lengthdir_x(_field.radius*_field.scaleRes/_field.field_h,
                   _field.rotation+_field.polygonAngle*i)
-  _ly=lengthdir_y(_field.radius*_field.scale/_field.field_h,
+  _ly=lengthdir_y(_field.radius*_field.scaleRes/_field.field_h,
                   _field.rotation+_field.polygonAngle*i)
               
   draw_vertex(world_x(_field.x+_lx*_y),world_y(_field.y+_ly*_y))
@@ -49,5 +49,5 @@ draw_vertex(world_x(_field.x+lengthdir_x(_polar2[1]*distortion_h,_polar2[0])),
             world_y(_field.y+lengthdir_y(_polar2[1]*distortion_h,_polar2[0])))
 
 
-draw_primitive_end()
+draw_primitive_end()  
 

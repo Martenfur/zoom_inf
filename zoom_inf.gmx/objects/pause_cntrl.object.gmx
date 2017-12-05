@@ -28,6 +28,9 @@
             <string>paused=1
 io_clear()
 
+audio_pause_sound(mus_main)
+
+
 </string>
           </argument>
         </arguments>
@@ -61,6 +64,7 @@ if keyboard_check_pressed(vk_back)
 if global.mRelease
 {
   paused=0
+  audio_resume_sound(mus_main)
   instance_destroy()
 }
 

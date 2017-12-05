@@ -190,7 +190,12 @@ if mobile &amp;&amp; !achievement_login_status()
 leaderboard[0]="CgkIz_LegOAeEAIQAA"
 
 if mobile
-{GoogleMobileAds_Init("ca-app-pub-4104668599784327~2424103199")}
+{
+  GoogleMobileAds_Init("ca-app-pub-4104668599784327/2523117697") //Hyperflex ad id. Change it later... or something.
+  GoogleMobileAds_LoadInterstitial()
+}
+
+adLoaded=0
 
 
 </string>
@@ -333,6 +338,30 @@ if adAl&gt;0
 {adAl-=1}
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="70">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+adLoaded=ds_map_find_value(async_load,"loaded")
 </string>
           </argument>
         </arguments>

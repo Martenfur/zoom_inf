@@ -26,7 +26,9 @@
     <extension index="0">extensions\Bloom shader</extension>
     <extension index="1">extensions\GooglePlayServicesExtension</extension>
   </NewExtensions>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\mus_main</sound>
+  </sounds>
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>

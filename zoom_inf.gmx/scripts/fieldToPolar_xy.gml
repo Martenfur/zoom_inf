@@ -20,7 +20,7 @@ with(argument0)
       _v2x=-middleVector[_sectorId,1],
       _v2y=middleVector[_sectorId,0];
       
-  _coordinates[1]=(((_y0*_v2x)-(_x0*_v2y))/((_v2x*_v1y)-(_v2y*_v1x)))*scale/field_h*radius
+  _coordinates[1]=(((_y0*_v2x)-(_x0*_v2y))/((_v2x*_v1y)-(_v2y*_v1x)))*scaleRes/field_h*radius
   
   if _coordinates[1]<0
   {_coordinates[1]=0}

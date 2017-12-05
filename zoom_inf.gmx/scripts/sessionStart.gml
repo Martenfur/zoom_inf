@@ -7,3 +7,7 @@ instance_create(0,FIELD_INTERNAL_H,player)
 with(mainField)
 {fieldIncrementState(0)}
 
+if music_enabled
+{audio_play_sound(mus_main,0,1)}
+
+

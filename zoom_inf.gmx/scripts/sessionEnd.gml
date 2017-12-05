@@ -32,4 +32,5 @@ if score_cur>score_high
 }
 gameSave()
 
+audio_stop_sound(mus_main)
 

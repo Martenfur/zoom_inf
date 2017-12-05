@@ -37,6 +37,7 @@ distortion=1 //Level of distorion.
 distortion_h=1
 
 drawEvent=ringDraw
+
 </string>
           </argument>
         </arguments>
