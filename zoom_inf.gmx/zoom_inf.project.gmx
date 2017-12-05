@@ -24,6 +24,7 @@
   </datafiles>
   <NewExtensions>
     <extension index="0">extensions\Bloom shader</extension>
+    <extension index="1">extensions\GooglePlayServicesExtension</extension>
   </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites"/>
@@ -102,6 +103,7 @@
     <script>scripts\strToColor.gml</script>
     <script>scripts\gameLoad.gml</script>
     <script>scripts\gameSave.gml</script>
+    <script>scripts\adDisplay.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shdr_bloom.shader</shader>

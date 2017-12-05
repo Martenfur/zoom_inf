@@ -20,12 +20,16 @@ if argument0
     menuStateInstantTransition(stateGameover)
     menuGameoverButtonsCreate()
   }
+  adDisplay()
 }
 
 score_prev=score_cur
 if score_cur>score_high
-{score_high=score_cur}
+{
+  score_high=score_cur
+  with(cntrl)
+  {achievement_post_score(leaderboard[0],score_high)}
+}
 gameSave()
-
 
 
