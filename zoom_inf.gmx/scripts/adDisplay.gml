@@ -9,7 +9,7 @@ with(cntrl)
 {
   if adAl=0 && mobile
   {
-    show_message("Heck, this ad is annoying!")//Display your pesky advertisement here.
+    GoogleMobileAds_LoadInterstitial()//show_message("Heck, this ad is annoying!")//Display your pesky advertisement here.
     adAl=adTime
   }
 }

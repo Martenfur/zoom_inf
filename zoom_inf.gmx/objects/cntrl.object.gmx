@@ -189,6 +189,9 @@ if mobile &amp;&amp; !achievement_login_status()
 
 leaderboard[0]="CgkIz_LegOAeEAIQAA"
 
+if mobile
+{GoogleMobileAds_Init("ca-app-pub-4104668599784327~2424103199")}
+
 
 </string>
           </argument>
