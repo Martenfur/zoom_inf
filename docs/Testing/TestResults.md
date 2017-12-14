@@ -17,4 +17,4 @@
 
 Как видно на приведённом скриншоте, приложение удовлетворяет заявленным требованиям.
 
-![Image alt](../docs/Testing/MemoryTest.jpg)
+![Image alt](zoom_inf/docs/Testing/MemoryTest.jpg)
